@@ -1,0 +1,33 @@
+# Project: SeewoFU
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+RES      = SeewoFU_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o $(RES)
+LIBS     = -L"F:/Dev-Cpp/MinGW64/lib" -L"F:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -mwindows -g3
+INCS     = -I"F:/Dev-Cpp/MinGW64/include" -I"F:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"F:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"F:/Dev-Cpp/MinGW64/include" -I"F:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"F:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"F:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = SeewoFU.exe
+CXXFLAGS = $(CXXINCS) -std=c++11 -g3
+CFLAGS   = $(INCS) -std=c++11 -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+SeewoFU_private.res: SeewoFU_private.rc NotificationIcon.rc
+	$(WINDRES) -i SeewoFU_private.rc --input-format=rc -o SeewoFU_private.res -O coff 
+
